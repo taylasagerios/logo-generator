@@ -1,7 +1,7 @@
-const inquier = require("inquirer");
+const inquirer = require("inquirer");
 const fs = require("fs");
 
-const { Triangle, Circle, Square } = require(".lib/shapes");
+const { Triangle, Circle, Square } = require("./lib/shapes");
 
 function writeToFile(fileName, answers) {
     let svgString = "";
@@ -16,21 +16,26 @@ function writeToFile(fileName, answers) {
     if (answers.shape === "Triangle") {
         shapeChoice = new Triangle();
         svgString += `<polygon points="150, 18 244, 182 56, 182" fill="${answers.shapeBackgroundColor}"/>`;
-    } else if (answers, shape === "Circle") {
+    } else if (answers.shape === "Circle") {
         shapeChoice = new Circle();
         svgString += `<circle cx="150" cy="115" r="80" fill="${answers.shapeBackgroundColor}"/>`;
-    } else (answers.shape === "Square") {
+    } else {
         shapeChoice = new Square();
         svgString += `<rect x="73" y="40" width="160" height="160" fill="${answers.shapeBackgroundColor}"/>`;
     }
-
-
-
+    svgString += `${answers.textColor}`;
     svgString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answers.textColor}">${answers.text}</text>`;
 
-    svgString += "<g>";
+    svgString += "</g>";
 
     svgString += "</svg>";
+
+
+    // svgString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answers.textColor}">${answers.text}</text>`;
+
+    // svgString += "<g>";
+
+    // svgString += "</svg>";
 
     fs.writeFile(fileName, svgString, (err) => {
         err ? console.log(err) : console.log(" Generated logo.svg");
