@@ -24,6 +24,8 @@ function writeToFile(fileName, answers) {
         svgString += `<rect x="73" y="40" width="160" height="160" fill="${answers.shapeBackgroundColor}"/>`;
     }
 
+
+
     svgString += `<text x="150" y="130" text-anchor="middle" font-size="40" fill="${answers.textColor}">${answers.text}</text>`;
 
     svgString += "<g>";
@@ -35,45 +37,45 @@ function writeToFile(fileName, answers) {
     });
 }
 
-function promptUser(){
+function promptUser() {
     inquirer
-   .prompt([
-    {
-        type: "imput",
-        message:
-            "What text would you like you logo to display? (Enter up to three characters)",
-        name: "text",
-    },
-    {
-        type: "imput",
-        message:
-            "What color would you like you to make the text? (Enter color keyword OR a hexadecimal number)",
-        name: "textcolor",
-    },
-    {
-        type: "list",
-        message:
-            "What shape would you like the logo to render?",
-        choices: ['Triangle', 'Circle', 'Square'],
-        name: "shape",
-    },
-    {
-        type: "input",
-        message:
-            "Choose shapes color (Enter color keyword OR a hexadecimal number)",
-        name: "shapeBackgroundColor",
-    },
+        .prompt([
+            {
+                type: "imput",
+                message:
+                    "What text would you like you logo to display? (Enter up to three characters)",
+                name: "text",
+            },
+            {
+                type: "imput",
+                message:
+                    "What color would you like you to make the text? (Enter color keyword OR a hexadecimal number)",
+                name: "textcolor",
+            },
+            {
+                type: "list",
+                message:
+                    "What shape would you like the logo to render?",
+                choices: ['Triangle', 'Circle', 'Square'],
+                name: "shape",
+            },
+            {
+                type: "input",
+                message:
+                    "Choose shapes color (Enter color keyword OR a hexadecimal number)",
+                name: "shapeBackgroundColor",
+            },
 
-]) 
+        ])
 
-.then((answers) => {
-    if(answers.text.lenght > 3){
-        console.log("Must enter a value of no more than 3 characters");
-        promptUser();
-    } else {
-        writeToFile("logo.svg", answers);
-    }
-});
+        .then((answers) => {
+            if (answers.text.lenght > 3) {
+                console.log("Must enter a value of no more than 3 characters");
+                promptUser();
+            } else {
+                writeToFile("logo.svg", answers);
+            }
+        });
 
 }
 
